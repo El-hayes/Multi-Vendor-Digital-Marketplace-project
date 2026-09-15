@@ -1,48 +1,142 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<!doctype html>
 
-    <h3>Admin Login</h3>
-    <form method="POST" action="{{ route('admin.login') }}">
-        @csrf
+<html lang="en">
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>{{ __('Admin Login') }}</title>
+    <!-- CSS files -->
+    <link href="{{ asset('assets/admin/css/tabler.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/admin/css/tabler-flags.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/admin/css/tabler-payments.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/admin/css/tabler-vendors.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/admin/css/demo.min.css') }}" rel="stylesheet" />
+
+    <style>
+        @import url('https://rsms.me/inter/inter.css');
+
+        :root {
+            --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+        }
+
+        body {
+            font-feature-settings: "cv03", "cv04", "cv11";
+        }
+
+
+        /* show password icon */
+        .password-wrapper {
+            position: relative;
+            width: 300px;
+        }
+
+        .password-wrapper input {
+            width: 100%;
+            padding: 10px 40px 10px 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .toggle-password {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            user-select: none;
+            font-size: 18px;
+            color: #888;
+        }
+
+        .toggle-password:hover {
+            color: #000;
+        }
+    </style>
+
+
+</head>
+
+<body class=" d-flex flex-column">
+    <script src="{{ asset('assets/admin/js/demo-theme.min.js') }}"></script>
+    <div class="page page-center">
+        <div class="container container-tight py-4">
+            <div class="text-center mb-4">
+
+            </div>
+            <div class="card card-md">
+                <div class="card-body">
+                    <h2 class="h2 text-center mb-4">{{ __('Login to your account') }}</h2>
+                    <form action="{{ route('admin.login') }}" method="POST">
+                        @csrf
+
+                        <div class="mb-3">
+                            <label class="form-label" for="email">{{ __('Email address') }}</label>
+                            <input type="email" id="email" name="email" class="form-control"
+                                placeholder="your@email.com" :value="old('email')" required>
+
+                            @error('email')
+                                <span class="text-danger"> {{ $message }} </span>
+                            @enderror
+
+                        </div>
+
+
+                        <div class="mb-2">
+                            <label class="form-label">
+                                Password
+                                <span class="form-label-description">
+                                    @if (Route::has('admin.password.request'))
+                                        <a
+                                            href="{{ route('admin.password.request') }}">{{ __('I forgot password') }}</a>
+                                    @endif
+                                </span>
+                            </label>
+                            <div class="input-group input-group-flat">
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="Your password" autocomplete="off" required>
+                                <span class="toggle-password" id="toggle" title="Show Password">👁️</span>
+
+                            </div>
+
+                            @error('password')
+                                <span class="text-danger d-block"> {{ $message }} </span>
+                            @enderror
+
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-check">
+                                <input type="checkbox" class="form-check-input" id="remember_me" name="remember" />
+                                <span class="form-check-label">{{ __('Remember me on this device') }}</span>
+                            </label>
+                        </div>
+                        <div class="form-footer">
+                            <button type="submit" class="btn btn-primary w-100">{{ __('Sign in') }}</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
         </div>
+    </div>
+    <!-- Libs JS -->
+    <!-- Tabler Core -->
+    <script src="{{ asset('assets/admin/js/tabler.min.js') }}" defer></script>
+    <script src="{{ asset('assets/admin/js/demo.min.js') }}" defer></script>
+</body>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+</html>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+{{-- show password icon --}}
+<script>
+    const password = document.getElementById("password");
+    const toggle = document.getElementById("toggle");
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('admin.password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('admin.password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    toggle.addEventListener("click", () => {
+        const isPassword = password.type === "password";
+        password.type = isPassword ? "text" : "password";
+        toggle.textContent = isPassword ? "🙈" : "👁️";
+    });
+</script>
