@@ -63,7 +63,8 @@
     <div class="page page-center">
         <div class="container container-tight py-4">
             <div class="text-center mb-4">
-
+                {{-- Alert Status--}}
+                <x-auth-session-status class="mb-4" :status="session('status')" />
             </div>
             <div class="card card-md">
                 <div class="card-body">
@@ -74,7 +75,7 @@
                         <div class="mb-3">
                             <label class="form-label" for="email">{{ __('Email address') }}</label>
                             <input type="email" id="email" name="email" class="form-control"
-                                placeholder="your@email.com" :value="old('email')" required>
+                                placeholder="your@email.com" value="{{ old('email') }}" required>
 
                             @error('email')
                                 <span class="text-danger"> {{ $message }} </span>
