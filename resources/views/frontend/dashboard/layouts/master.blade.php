@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="{{ asset('assets/frontend//css/magnific-popup.cs') }}s">
     <!-- line awesome -->
     <link rel="stylesheet" href="{{ asset('assets/frontend//css/line-awesome.min.css') }}">
+    <!-- Select 2 -->
+    <link rel="stylesheet" href="{{ asset('assets/frontend/css/select2.min.css') }}">
     <!-- Tabler Icons CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.21.0/tabler-icons.min.css"
         integrity="sha512-XrgoTBs7P5YtpkeKqKOKkruURsawIaRrhe8QrcWeMnFeyRZiOcRNjBAX+AQeXOvx9/9fSY32dVct1PccRoCICQ=="
@@ -165,6 +167,11 @@
             <!-- ===================== Dashboard Sidebar End ======================= -->
 
             <div class="dashboard-body">
+
+                <!-- Dashboard Nav Start -->
+                @include('frontend.dashboard.layouts.nav')
+                <!-- Dashboard Nav End -->
+
                 <!-- ====================== Dashboard Body ======================== -->
                 @yield('content')
                 <!-- ====================== Dashboard Body Start ======================== -->
@@ -174,7 +181,8 @@
                 <!-- ====================== Dashboard Footer Start ======================== -->
                 <div class="dashboard-footer bottom-footer-two mt-32 border-0 bg-white">
                     <div class="bottom-footer__inner flx-between gap-3">
-                        <p class="bottom-footer__text font-14"> Copyright © {{ date('Y') }} DigiMart, All rights reserved.</p>
+                        <p class="bottom-footer__text font-14"> Copyright © {{ date('Y') }} DigiMart, All rights
+                            reserved.</p>
 
                     </div>
                 </div>

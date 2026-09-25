@@ -51,8 +51,13 @@
 
 
         <!------------------- Page Content--------------------->
-
-        @yield('content')
+        <div class="page-wrapper">
+            <div class="page-body">
+                <div class="container-xl">
+                    @yield('content')
+                </div>
+            </div>
+        </div>
 
 
         <!------------------- End Page Content--------------------->
