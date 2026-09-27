@@ -6,8 +6,6 @@ use Exception;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 
-use function PHPUnit\Framework\throwException;
-
 trait FileUpload
 {
     // Upload File

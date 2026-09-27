@@ -9,7 +9,7 @@
                     <div class="profile-info">
                         <div class="profile-info__inner mb-40 text-center">
 
-                            <div class="avatar-upload mb-24">
+                            <div class="avatar-upload mb-24 img-fluid rounded">
                                 {{-- <div class="avatar-edit">
                                     <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg">
                                     <label for="imageUpload">

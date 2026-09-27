@@ -33,6 +33,14 @@ class ProfileController extends Controller
 
         // handle file upload
         if ($request->hasFile('avatar')) {
+            // Delete old image ONLY if it isn't the default image
+            if (
+                $user->avatar &&
+                $user->avatar !== '/default/avatar.jpg'
+            ) {
+                $this->deleteFile($user->avatar);
+            }
+
             $avatarPath = $this->uploadFile($request->avatar);
             $user->avatar = $avatarPath;
         }

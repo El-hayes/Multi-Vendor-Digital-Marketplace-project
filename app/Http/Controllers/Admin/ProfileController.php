@@ -8,8 +8,6 @@ use App\Http\Requests\Admin\ProfileUpdateRequest;
 use App\Services\NotificationService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use App\Traits;
 use App\Traits\FileUpload;
 
 class ProfileController extends Controller
@@ -29,8 +27,15 @@ class ProfileController extends Controller
         $user = Auth()->guard('admin')->user();
 
         if($request->hasFile('avatar')) {
-           // @unlink(public_path($user->avatar));
-           $this->deleteFile($user->avatar);
+
+            // Delete old image ONLY if it isn't the default image
+            if (
+                $user->avatar &&
+                $user->avatar !== '/default/avatar.jpg'
+            ) {
+                $this->deleteFile($user->avatar);
+            }
+
             $avatarPath = $this->uploadFile($request->file('avatar'));
             $user->avatar = $avatarPath;
         }
