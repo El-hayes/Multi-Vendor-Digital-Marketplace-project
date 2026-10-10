@@ -2,12 +2,11 @@
 
 namespace Database\Seeders;
 
-use Database\Seeders\Frontend\UserSeeder;
 use Database\Seeders\Admin\AdminSeeder;
+use Database\Seeders\Admin\RolePermissionSeeder;
+use Database\Seeders\Frontend\UserSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
-use function Pest\Laravel\call;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,7 +26,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UserSeeder::class,
-            AdminSeeder::class
+            RolePermissionSeeder::class,
+            AdminSeeder::class,
+
         ]);
 
 

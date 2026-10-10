@@ -14,13 +14,25 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
+        // Create Admin User
         $admin = new Admin();
-
         $admin->name = 'Super Admin';
         $admin->email = 'admin@gmail.com';
         $admin->password = bcrypt('password');
-
         $admin->save();
+        // assign role
+        $admin->assignRole('Super Admin');
+
+        // Create Reviewer User
+        $reviewer = new Admin();
+        $reviewer->name = 'Reviewer';
+        $reviewer->email = 'reviewer@gmail.com';
+        $reviewer->password = bcrypt('password');
+        $reviewer->save();
+        // assign role
+        $reviewer->assignRole('Reviewer');
+
+
 
     }
 }

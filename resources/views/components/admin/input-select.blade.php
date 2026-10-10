@@ -4,4 +4,7 @@
         <option value="">{{ __('Select') }}</option>
         {{ $slot }}
     </select>
+    <x-input-error :messages="$errors->get(__($name))" class="mt-2" />
 </div>
+
+
