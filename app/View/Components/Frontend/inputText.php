@@ -16,19 +16,22 @@ class inputText extends Component
     public string $type;
     public ?string $value;
     public ?string $placeholder;
+    public ?string $required;
 
     public function __construct(
         string $name,
         string $label = null,
         string $type = 'text',
         string $value = null,
-        string $placeholder = null)
-    {
+        string $placeholder = null,
+        string $required = null,
+    ){
         $this->name = $name;
         $this->label = $label ?? \Str::title(str_replace('_', ' ', $name));
         $this->type = $type;
         $this->value = $value;
         $this->placeholder = $placeholder;
+        $this->required = $required;
     }
 
     /**

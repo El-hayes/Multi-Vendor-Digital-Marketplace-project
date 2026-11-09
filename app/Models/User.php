@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -22,6 +23,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'kyc_status',
+        'user_type',
     ];
 
     /**
@@ -46,4 +49,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // user relationship with kyc verification
+    public function kyc(): HasMany
+    {
+       return $this->hasMany(KycVerification::class , 'user_id' , 'id')->orderBy('created_at', 'DESC');
+    }
+
+
 }

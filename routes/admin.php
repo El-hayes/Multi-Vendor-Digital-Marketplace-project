@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\Auth\NewPasswordController;
 use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\KycController;
+use App\Http\Controllers\Admin\KycSettingController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\RoleUserController;
@@ -55,4 +57,10 @@ Route::middleware('auth:admin')->prefix('admin')->as('admin.')->group(function (
         // Role User Routes
         Route::resource('user-roles', RoleUserController::class);
 
+        // KYC Routes
+        Route::get('/kyc-settings', [KycSettingController::class , 'index'])->name('kyc-settings.index');
+        Route::put('/kyc-settings', [KycSettingController::class , 'update'])->name('kyc-settings.update');
+        Route::get('/kyc/download-document/{kyc}/{attachment_id}', [KycController::class, 'downloadDocument'])->name('kyc.download-document');
+        Route::put('/kyc/update-status/{id}', [KycController::class, 'updateStatus'])->name('kyc.update-status');
+        Route::resource('kyc', KycController::class);
 });

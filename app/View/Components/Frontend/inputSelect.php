@@ -13,11 +13,13 @@ class inputSelect extends Component
      */
     public string $name;
     public string $label;
+    public ?string $required = null;
 
-    public function __construct( string $name,string $label = null)
+    public function __construct( string $name,string $label = null ,string $required = null)
     {
         $this->name = $name;
         $this->label = $label ?? \Str::title(str_replace('_', ' ', $name));
+        $this->required = $required;
 
     }
 

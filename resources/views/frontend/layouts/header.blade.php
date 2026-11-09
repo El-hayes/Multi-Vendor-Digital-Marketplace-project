@@ -4,7 +4,7 @@
         <div class="sale-offer__content flx-between position-relative">
             <div class="sale-offer__countdown">
 
-                <div class="countdown" data-date="16-10-2026" data-time="12:00">
+                <div class="countdown" data-date="16-12-2026" data-time="12:00">
                     <div class="day"><span class="num"></span><span class="word"></span></div>
                     <div class="hour"><span class="num"></span><span class="word"></span></div>
                     <div class="min"><span class="num"></span><span class="word"></span></div>
@@ -87,7 +87,7 @@
                         <a href="contact.html" class="nav-menu__link">Contact</a>
                     </li>
                     <li class="nav-menu__item">
-                        <a href="#" class="nav-menu__link">Start Selling</a>
+                        <a href="{{ route('kyc') }}" class="nav-menu__link">Start Selling</a>
                     </li>
                 </ul>
             </div>

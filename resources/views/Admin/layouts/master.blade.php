@@ -33,6 +33,9 @@
             font-feature-settings: "cv03", "cv04", "cv11";
         }
     </style>
+
+    <!-- to push Style from any page -->
+    @stack('styles')
 </head>
 
 <body>
@@ -93,6 +96,8 @@
     <!-- Admin Js -->
     <script src="{{asset('assets/admin/js/default/admin.js')}}" ></script>
 
+    <!-- to push scripts from any page -->
+@stack('scripts')
 </body>
 
 </html>
