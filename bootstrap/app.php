@@ -6,6 +6,7 @@ use Illuminate\Foundation\Configuration\Middleware;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\KycMiddleware;
+use App\Http\Middleware\IsAuthorMiddleware;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -21,6 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
         'guest' => RedirectIfAuthenticated::class,
         'auth' => Authenticate::class,
         'kyc' =>KycMiddleware::class,
+        'is_author' => IsAuthorMiddleware::class
     ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

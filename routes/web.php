@@ -24,4 +24,9 @@ Route::group(['middleware' => ['auth' , 'verified']], function () {
 });
 
 
+/////// route for test ISAuthor middleware ///////
+Route::get('/test_author_middleware', function () {
+    dd('test_author_middleware');
+})->middleware('is_author');
+
 require __DIR__ . '/auth.php';

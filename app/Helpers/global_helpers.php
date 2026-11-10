@@ -21,3 +21,11 @@ if (!function_exists('pendingKycCount')){
     }
 
 }
+
+// Chek User is author
+if(!function_exists('isAuthor')) {
+    function isAuthor(): bool
+    {
+        return user()->user_type == 'author' && user()->kyc_status == 1 ? true : false;
+    }
+}

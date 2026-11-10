@@ -68,10 +68,9 @@ class KycController extends Controller
             // update user type & KYC status
             $kycRequest->user->update([
                 'kyc_status' => 1,
-                'user_type' => 'author',
-                'reject_reason' => $request->reason
-
+                'user_type' => 'author'
             ]);
+            $kycRequest->reject_reason = null;
 
             //Send Mail TO User
             MailSenderService::sendMail(
@@ -81,16 +80,15 @@ class KycController extends Controller
                 content: __('We Are Happy to inform you that your KYC request has been approved.')
 
             ); // End Sending Mail
-        } else {
+        } elseif($request->status == 'rejected') {
             $kycRequest->user->update([
                 'kyc_status' => 0,
                 'user_type' => 'user'
             ]);
 
             // Update Reject Reason if found
-            KycVerification::findOrFail($id)->update([
-                'reject_reason' => $request->reason
-            ]);
+            $kycRequest->reject_reason = $request->reason;
+
 
             MailSenderService::sendMail(
                 name: $kycRequest->user->name,
@@ -98,6 +96,10 @@ class KycController extends Controller
                 mailSubject: __('Your KYC request has been rejected.'),
                 content: $request->reason ?? __('We Are Sorry to inform you that your KYC request has been rejected.')
             );
+        } else {
+            $kycRequest->user->update([
+                'kyc_status' => 0,
+            ]);
         }
 
         $kycRequest->save();

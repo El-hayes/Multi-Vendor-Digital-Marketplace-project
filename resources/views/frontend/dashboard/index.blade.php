@@ -4,7 +4,7 @@
 
     <div class="dashboard-body__content">
         {{--Show alert start--}}
-        @if( user()->kyc_status == 0  && user()->kyc->first()->status == 'pending')
+        @if( user()->kyc_status == 0  && user()->kyc->first()?->status == 'pending')
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <i class="fas fa-exclamation-triangle"></i>
                 <strong>{{ __('Your KYC request is pending') }}</strong> {{ __('we will get notify  when it will be approved') }}
